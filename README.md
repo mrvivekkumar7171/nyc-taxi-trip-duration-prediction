@@ -160,20 +160,55 @@ NOTE: when the mlflow is running on the EC2, we can pull the model directly from
     GH_PERSONAL_ACCESS_TOKEN
 
 # Create a self-hosted runner
-    
+    go to EC2 in AWS and create a instance
+    click on instance ID once the instance is created
+    click on connect then click on connect again. A terminal will open
+    Now, go to the your project repo then settings then Actions then Runners
+    Then Click on New self-hosted runner then click on linux. Run the given commands in the terminal
+
+        mkdir actions-runner && cd actions-runner
+
+        curl -o actions-runner-linux-x64-2.323.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.323.0/actions-runner-linux-x64-2.323.0.tar.gz
+
+        echo "0dbc9bf5a58620fc52cb6cc0448abcca964a8d74b5f39773b7afcad9ab691e19  actions-runner-linux-x64-2.323.0.tar.gz" | shasum -a 256 -c
+
+        tar xzf ./actions-runner-linux-x64-2.323.0.tar.gz
+
+        ./config.sh --url https://github.com/mrvivekkumar7171/trip-duration --token A5ORRA6I2BKHNU7GXCHPJXTIAE4ZA
+
+        Enter the name of the runner group to add this runner to: [press Enter for Default] (skipped)
+        Enter the name of runner: [press Enter for ip-172-31-6-56] trip-runner (here, i have named it trip-runner)
+        This runner will have the following labels: 'self-hosted', 'Linux', 'X64' 
+        Enter any additional labels (ex. label-1,label-2): [press Enter to skip] (skipped)
+    lastly you will successfull message 
+        √ Runner successfully added
+        √ Runner connection is good
+
+        ./run.sh (to start the runner)
+
+NOTE: every project must have a unique self-hosted runner and if wants more than one runner in a EC2 instance then change the name of the folder actions-runner in the above command
 
 # Dockerfile and it's dev-requirements.txt creation
-
+    create the Dockerfile with model.joblib, app, requirements.txt and scr folder for build_feature function in an app folder
+    installing requirements and running the app.py
 
 # Using CI with the best model Branch
-
-# In CI,
-    setup - code, python, dvc
-    run pipeline - data and model access
+    creating the ci/cd pipeline
+## In CI,
+    nothing done in CI
+## Build and push image to ECR
+    Install Utilities
+    Configure/Login AWS credentials
+    Build, tag, and push the containerize image to image hub (Amazon ECR)
     report via cml - model metrics
-    docker - containerize to image and push to image hub
-# In CD,
-    Deploy best model branch on EC2 via the app.py
+## In CD,
+    using self-hosted runner by the name trip-runner
+    Configure/Login AWS credentials
+    Pull latest images on EC2
+    Delete Previous Container
+    Run/Deploy Docker Image to serve users via the app.py
+
+NOTE: To successfully run the CD, the self-hosted runner must be active/idle.
 
 Project Organization
 ------------
