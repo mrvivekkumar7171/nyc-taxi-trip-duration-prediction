@@ -89,3 +89,6 @@ target/
 .mypy_cache/
 /data
 /models
+
+# to ignore the temp server folder
+TEMP/

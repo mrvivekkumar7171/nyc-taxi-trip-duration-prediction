@@ -1,0 +1,4 @@
+[core]
+    remote = localtemp
+['remote "localtemp"']
+    url = ../TEMP

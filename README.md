@@ -144,6 +144,12 @@ NOTE: when the mlflow is running on the EC2, we can pull the model directly from
     Verify Setup (list your buckets if credentials are working)
         aws s3 ls
 
+# push your code to github repo
+    mkdir TEMP (this will create a TEMP folder that will work as server, temporarily)
+    dvc remote add -d localtemp ./TEMP (once the folder is created, then add remote server to dvc)
+    dvc push (to push the your DVC-tracked data)
+    add TEMP/ inside .gitignore (so git will ignore the TEMP/ folder)
+
 # Connect AWS with the GitHub
     go to your repo inside github then settings then secrets and variables and lastly add secrets
     AWS_ACCESS_KEY_ID
@@ -154,7 +160,7 @@ NOTE: when the mlflow is running on the EC2, we can pull the model directly from
     GH_PERSONAL_ACCESS_TOKEN
 
 # Create a self-hosted runner
-    
+
 
 # Dockerfile and it's dev-requirements.txt creation
 
