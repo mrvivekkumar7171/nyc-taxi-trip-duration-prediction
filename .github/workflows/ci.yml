@@ -60,6 +60,7 @@ jobs:
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
   
   Continuous-Deployment:
+  # try with named runner
     runs-on: self-hosted # [self-hosted, trip-duration-runner] # ubuntu-latest
     needs: build-and-push-ecr-image
     steps:

@@ -174,7 +174,7 @@ NOTE: when the mlflow is running on the EC2, we can pull the model directly from
 
         tar xzf ./actions-runner-linux-x64-2.323.0.tar.gz
 
-        ./config.sh --url https://github.com/mrvivekkumar7171/trip-duration --token A5ORRA6I2BKHNU7GXCHPJXTIAE4ZA
+        ./config.sh --url https://github.com/mrvivekkumar7171/trip-duration --token some_token
 
         Enter the name of the runner group to add this runner to: [press Enter for Default] (skipped)
         Enter the name of runner: [press Enter for ip-172-31-6-56] trip-runner (here, i have named it trip-runner)
@@ -183,10 +183,23 @@ NOTE: when the mlflow is running on the EC2, we can pull the model directly from
     lastly you will successfull message 
         √ Runner successfully added
         √ Runner connection is good
-
+        # Runner settings
+        Enter name of work folder: [press Enter for _work] (skipped)
+        √ Settings Saved. (confirm the runner is saved and ./run.sh will work easily)
         ./run.sh (to start the runner)
+        √ Connected to GitHub
+        Current runner version: '2.323.0'
+        2025-04-17 18:19:15Z: Listening for Jobs (waiting for job)
+        2025-04-17 18:19:19Z: Running job: Continuous-Deployment
+        2025-04-17 18:20:03Z: Job Continuous-Deployment completed with result: Succeeded (confirm that CD job is completed)
+        ^CExiting... (press ctrl + c to exit)
+        Runner listener exit with 0 return code, stop the service, no retry needed.
+        Exiting runner...
 
 NOTE: every project must have a unique self-hosted runner and if wants more than one runner in a EC2 instance then change the name of the folder actions-runner in the above command
+
+NOTE: To delete the docker the below command in terminal after getting to the root and delete the runner at the github
+    rm -rf actions-runner/
 
 # Dockerfile and it's dev-requirements.txt creation
     create the Dockerfile with model.joblib, app, requirements.txt and scr folder for build_feature function in an app folder
@@ -217,6 +230,27 @@ NOTE: every project must have a unique self-hosted runner and if wants more than
         docker ps
     To verify the error on running docker
         docker attach trip-duration (trip-duration is the github repo name)
+    Remove unused Docker containers
+        docker container prune -f
+    Remove unused Docker images
+        docker image prune -a -f
+    Remove unused Docker volumes (optional but helpful)
+        docker volume prune -f
+    Clear Docker build cache (if still low on space)
+        docker builder prune -a -f
+    To stop the running docker
+        docker stop <container_id or container_name> (ex: docker stop trip-duration)
+
+# Port set up in AWS
+    ### if host="0.0.0.0" and port=8080 in app.py and Public IPv4 address is 3.7.68.180 on clicking the instance id in the instances in the EC2
+    ### click on Security then click on launch-wizard-1 then select the security group launch-wizard-1 then click on Inbound rules then click on Edit inbound rules then Add rule then fill 
+        Type: Custom TCP
+        Port Range: 8080
+        Source: 0.0.0.0/0 (or your IP for better security)
+    lastly click on save rules
+    ### if above two task are done then Access link will be like this: (note: http: is correct not https:)
+        http://3.7.68.180:8080/ 
+
 
 NOTE: To successfully run the CD, the self-hosted runner must be active/idle.
 
