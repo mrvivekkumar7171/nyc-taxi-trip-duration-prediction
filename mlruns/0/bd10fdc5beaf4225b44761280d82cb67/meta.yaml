@@ -1,0 +1,16 @@
+artifact_uri: file:///C:/Users/Vivek/Desktop/trip-duration/mlruns/0/bd10fdc5beaf4225b44761280d82cb67/artifacts
+deleted_time: 1744894085002
+end_time: 1744891543477
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: bd10fdc5beaf4225b44761280d82cb67
+run_name: XGBRegressor
+run_uuid: bd10fdc5beaf4225b44761280d82cb67
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744891528233
+status: 3
+tags: []
+user_id: Vivek

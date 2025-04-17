@@ -1,0 +1,27 @@
+# note: here we are not passing the system arguments like done in creditcard project as we don't need one in this project
+
+# outs: we have removed the outs as if we put outs as .data/something conflict may happen due to both are tracking the same thing
+# as we have already added data folder under dvc tracking and as long as your code in build_features.py and train_model.py is tracked in the data folder.
+# on running the dvc repro or dvc exp run, it will automatically track the changes in the data folder and if changes then run the below jobs.
+
+stages:
+  # make_dataset.py if required
+
+  # running the build_features.py file to create/update the features
+  build_features:
+    cmd: python .\src\features\build_features.py
+    deps:
+    - .\data\raw\
+    - .\src\features\build_features.py
+  # running the train_model.py file to create/update the model.joblib file
+  train_model:
+    cmd: python .\src\models\train_model.py .\data\processed\
+    deps:
+    - .\data\processed\
+    - .\src\models\train_model.py
+    # running the push_model.py file to push the model.joblib to the cloud S3 bucket
+  push_model:
+    cmd: python .\src\models\push_model.py .\data\processed\
+    deps:
+    - .\models\
+    - .\src\models\train_model.py

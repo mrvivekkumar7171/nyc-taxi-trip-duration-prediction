@@ -1,0 +1,40 @@
+{
+  "dataframe_split": {
+    "columns": [
+      "vendor_id",
+      "passenger_count",
+      "pickup_longitude",
+      "pickup_latitude",
+      "dropoff_longitude",
+      "dropoff_latitude",
+      "store_and_fwd_flag",
+      "distance_haversine",
+      "distance_dummy_manhattan",
+      "direction",
+      "pickup_weekday",
+      "pickup_hour",
+      "pickup_minute",
+      "pickup_dt",
+      "pickup_week_hour"
+    ],
+    "data": [
+      [
+        2,
+        1,
+        -73.86276245117188,
+        40.768821716308594,
+        -73.89170074462889,
+        40.74668884277344,
+        0,
+        3.463778204080909,
+        4.898059214044709,
+        -135.26731137499235,
+        2,
+        18,
+        21,
+        15618045.0,
+        66
+      ]
+    ]
+  }
+}

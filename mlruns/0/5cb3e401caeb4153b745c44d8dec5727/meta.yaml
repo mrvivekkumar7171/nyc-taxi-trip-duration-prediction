@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Vivek/Desktop/trip-duration/mlruns/0/5cb3e401caeb4153b745c44d8dec5727/artifacts
+end_time: 1744901605708
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5cb3e401caeb4153b745c44d8dec5727
+run_name: XGB Final Model
+run_uuid: 5cb3e401caeb4153b745c44d8dec5727
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1744901595315
+status: 3
+tags: []
+user_id: Vivek

@@ -1,0 +1,43 @@
+artifact_path: model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.16
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.3.2
+is_signature_from_type_hint: false
+mlflow_version: 2.21.3
+model_size_bytes: 592504
+model_uuid: 7adb6998db1a4857bcb8d8d8b9e45ca2
+prompts: null
+run_id: 58ce7cc29a2f45d48cae87fd89814808
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "long", "name": "vendor_id", "required": true}, {"type": "long",
+    "name": "passenger_count", "required": true}, {"type": "double", "name": "pickup_longitude",
+    "required": true}, {"type": "double", "name": "pickup_latitude", "required": true},
+    {"type": "double", "name": "dropoff_longitude", "required": true}, {"type": "double",
+    "name": "dropoff_latitude", "required": true}, {"type": "long", "name": "store_and_fwd_flag",
+    "required": true}, {"type": "double", "name": "distance_haversine", "required":
+    true}, {"type": "double", "name": "distance_dummy_manhattan", "required": true},
+    {"type": "double", "name": "direction", "required": true}, {"type": "long", "name":
+    "pickup_weekday", "required": true}, {"type": "long", "name": "pickup_hour", "required":
+    true}, {"type": "long", "name": "pickup_minute", "required": true}, {"type": "double",
+    "name": "pickup_dt", "required": true}, {"type": "long", "name": "pickup_week_hour",
+    "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float32", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-04-17 12:07:51.132151'

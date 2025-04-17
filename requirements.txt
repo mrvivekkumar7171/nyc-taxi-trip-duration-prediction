@@ -1,0 +1,13 @@
+fastapi
+joblib
+uvicorn
+scikit-learn
+pandas
+xgboost
+
+# requirements of app.py
+# ipython
+# lazypredict
+# hyperopt
+# botocore
+# mlflow

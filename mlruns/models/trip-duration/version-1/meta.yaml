@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1744902148827
+current_stage: None
+description: ''
+last_updated_timestamp: 1744902148827
+name: trip-duration
+run_id: 4be5c5a704514b2088b1d70dd54f6ee2
+run_link: ''
+source: file:///C:/Users/Vivek/Desktop/trip-duration/mlruns/0/4be5c5a704514b2088b1d70dd54f6ee2/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/Vivek/Desktop/trip-duration/mlruns/0/4be5c5a704514b2088b1d70dd54f6ee2/artifacts/model
+user_id: null
+version: 1
