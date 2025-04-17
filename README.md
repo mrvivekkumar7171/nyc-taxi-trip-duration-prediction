@@ -153,14 +153,14 @@ NOTE: when the mlflow is running on the EC2, we can pull the model directly from
 # Connect AWS with the GitHub
     go to your repo inside github then settings then secrets and variables and lastly add secrets
     AWS_ACCESS_KEY_ID
-    AWS_ECR_LOGIN_URI
-    AWS_REGION
     AWS_SECRET_ACCESS_KEY
+    AWS_REGION
+    AWS_ECR_LOGIN_URI
     ECR_REPOSITORY_NAME
     GH_PERSONAL_ACCESS_TOKEN
 
 # Create a self-hosted runner
-
+    
 
 # Dockerfile and it's dev-requirements.txt creation
 
