@@ -207,6 +207,16 @@ NOTE: every project must have a unique self-hosted runner and if wants more than
     Pull latest images on EC2
     Delete Previous Container
     Run/Deploy Docker Image to serve users via the app.py
+    Once the you receive the below message from the runner in the terminal after the ci/cd successful run
+        2025-04-17 18:19:19Z: Running job: Continuous-Deployment
+        2025-04-17 18:20:03Z: Job Continuous-Deployment completed with result: Succeeded
+    We can close the runner to listen using 
+        Ctrl + C
+    
+    To check the runner services
+        docker ps
+    To verify the error on running docker
+        docker attach trip-duration (trip-duration is the github repo name)
 
 NOTE: To successfully run the CD, the self-hosted runner must be active/idle.
 
