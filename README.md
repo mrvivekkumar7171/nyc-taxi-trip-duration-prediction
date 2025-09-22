@@ -7,6 +7,8 @@ We are creating a service, that will take a few inputs and return the trip durat
 The service will be hosted/deployed on internet and It will work only with a specific input and trip duration
 Here, User visit the url /url/predict?data and the Server in return give the trip duration to the User.
 
+- Implement Type hints in machine learning models, particularly in Python, are optional annotations that specify the expected types of variables, function parameters, and return values. help to find the errors before CI/CD pipeline running.
+
 # setup vscode and anaconda
     if not installed
 
@@ -14,12 +16,14 @@ Here, User visit the url /url/predict?data and the Server in return give the tri
     open Anaconda Prompt
     conda create -n ds python=3.10 (create env in not created)
     conda activate ds
-    check for pip, dvc and git and python (if not then install) (git must be on the global system and dvc must be on the base env of anaconda while the rest must be env specific)
+    check for pip, dvc and git and python (if not then install) (git must be on the global system and dvc and the rest must be env specific)
     conda install pip
     pip --version
     python --version
     dvc --version (if not then check with base env)
     git --version
+
+Note: For advanced projects or production-level workflows, tools like **Apache Airflow** or **Kubeflow** Pipelines can be used in place of DVC to manage complex data pipelines, model training, and deployment processes. These tools offer better scalability, scheduling, and monitoring features, making them more suitable for enterprise-level or cloud-based ML operations.
 
 # Create the project using CookieCutter template
     pip install cookiecutter (if not installed)
@@ -70,6 +74,21 @@ move the data train and test csv to the data/raw/ after unzipping
     dvc add models/ (same for models/)
     git add .gitignore models.dvc
 
+# Connect DVC with Google Drive
+    Adding Gdrive as remote:
+        Create a Folder over the Drive where you want to store the DVC Data. (Note this folder will be used for storing and versioning the data)
+        Find the folder ID of the Google Drive folder.
+        Run dvc remote add --default drive gdrive://<Folder ID> to add Gdrive as a remote.
+        Run dvc remote modify drive gdrive_acknowledge_abuse true.
+    Install drive dependency:
+        Run pip install dvc_gdrive to install gdrive dependency.
+    Push the data:
+        Run dvc push to push the data.
+        Authenticate the drive in the browser.
+    Finalize push to git:
+        Run git status to check the changes.
+        Run git add .dvc/config, git commit -m "Adding data to remote" and git push to finalize the push to the repository.
+
 # commit data changes with your code exclusively (if data is changed manually then it must be commit to git along with dvc)
     **Git hooks**
     **Checkout**: Automatically runs dvc checkout after git checkout to update workspace data.
@@ -101,10 +120,12 @@ move the data train and test csv to the data/raw/ after unzipping
     i will create a push_model.py in place of predict_model.py i.e. src/models/push_model.py
     send the best model to the aws to the ECR or S3 (model registry) manually 
     then from S3, we will read the model to our code
+    - (also what we can do with best model of all type and to find the which best model we should put on the S3. This can be done by the having 1 or 2 more test dataset and then test the models on these test dataset once only and suppose you get two best models then we can compare the top two best model type with best hyperparameter using precision, recall, accuracy (classification) and R-Square, root mean-square, least square and ROC curve for classification problem then we will get final best model)
     parallely dvc is controlling the model
     dvc repro
     git add dvc.lock models.dvc
     dvc push
+NOTE: if making sense then log everything in hyperparameter tunning else when not making sense only log the best model.
 
 # mlflow setup
     Open your terminal and run:
@@ -126,6 +147,9 @@ move the data train and test csv to the data/raw/ after unzipping
     Press Ctrl + C to exit the mlflow ui
     Ctrl + C
 NOTE: when the mlflow is running on the EC2, we can pull the model directly from the mlflow to retraining etc.
+
+# MLflow working
+    in mlflow we are firstly run the multiple models and then again run the best model and log it with the mlflow
 
 # connecting aws cli in local computer
     For Windows, Download AWS CLI v2 from the below link. Once downloaded, installed it via the installer:
@@ -214,6 +238,8 @@ NOTE: To delete the docker the below command in terminal after getting to the ro
     Configure/Login AWS credentials
     Build, tag, and push the containerize image to image hub (Amazon ECR)
     report via cml - model metrics
+NOTE: the folder/file in the outs: in name.yml will be automatically tracked by the DVC
+NOTE: Also, in companies, all the runner are self-hosted even the for CI. Also, we add logging in runner to debug using log.
 ## In CD,
     using self-hosted runner by the name trip-runner
     Configure/Login AWS credentials
@@ -243,7 +269,7 @@ NOTE: To delete the docker the below command in terminal after getting to the ro
 
 # Port set up in AWS
     ### if host="0.0.0.0" and port=8080 in app.py and Public IPv4 address is 3.7.68.180 on clicking the instance id in the instances in the EC2
-    ### click on Security then click on launch-wizard-1 then select the security group launch-wizard-1 then click on Inbound rules then click on Edit inbound rules then Add rule then fill 
+    ### click on Security then click on launch-wizard-1 then click on Edit inbound rules then Add rule then fill 
         Type: Custom TCP
         Port Range: 8080
         Source: 0.0.0.0/0 (or your IP for better security)
